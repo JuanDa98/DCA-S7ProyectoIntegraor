@@ -45,7 +45,8 @@ public class Logica {
 		}
 
 		fondo = app.loadImage("../data/interfaz/interfaz.png");
-
+		
+		//escala las imagenes
 		image = ima[play].get();
 		image.resize(412, 241);
 	}
@@ -53,10 +54,10 @@ public class Logica {
 	// ======================================================================================================================
 
 	public void pintar() {
+		//Carga la imagen de fondo
 		app.image(fondo, 0, 0);
 
 		// carga la imagen del visualizador
-
 		ima[play].resize(412 + modisize, 241 + modisize);
 
 		app.pushMatrix();
@@ -87,7 +88,8 @@ public class Logica {
 			play -= 1;
 			tam = 0;
 		}
-
+		
+		//me permite seguir cambiando imagenes infinitamente
 		if (play > 19) {
 			play = 0;
 
@@ -95,6 +97,7 @@ public class Logica {
 		if (play < 0) {
 			play = 19;
 		}
+		
 		image = ima[play].get();
 		image.resize(412, 241);
 
