@@ -1,5 +1,5 @@
 
-import processing.core.*;
+import processing.core.PApplet;;
 
 public class MainAppS7 extends PApplet {
 	Logica app;

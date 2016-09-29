@@ -9,9 +9,8 @@ public class Logica {
 
 	int play = 0, modisize = 0, tam = 0, rotar = 0, y = 0;
 	boolean aumento = true, full = false;
-	private PImage fondo;
+	private PImage fondo, image;
 	private PImage[] ima = new PImage[20];
-	private PImage image;
 
 	// ======================================================================================================================
 
@@ -24,7 +23,7 @@ public class Logica {
 		String[] tipos = new String[] { "jpg", "png", "bmp" };
 
 		// identifica las extensiones de las imagenes
-		FilenameFilter filtroIma = new FilenameFilter() {
+		FilenameFilter analiza = new FilenameFilter() {
 
 			public boolean accept(File carpeta, String nombre) {
 				for (final String ext : tipos) {
@@ -37,7 +36,7 @@ public class Logica {
 		};
 
 		// arreglo de tipo File que guarda la ubicacion de las imagenes
-		File[] archivos = carpeta.listFiles(filtroIma);
+		File[] archivos = carpeta.listFiles(analiza);
 
 		// Me carga las imagenes
 		for (int i = 0; i < archivos.length; i++) {
@@ -81,12 +80,14 @@ public class Logica {
 		if (app.mouseX < 771 && app.mouseX > 736 && app.mouseY < 445 && app.mouseY > 403) {
 			play += 1;
 			tam = 0;
+			rotar = 0;
 
 		} else
 		// Atras en el visualizador
 		if (app.mouseX < 609 && app.mouseX > 575 && app.mouseY < 445 && app.mouseY > 406) {
 			play -= 1;
 			tam = 0;
+			rotar = 0;
 		}
 		
 		//me permite seguir cambiando imagenes infinitamente
@@ -97,6 +98,7 @@ public class Logica {
 		if (play < 0) {
 			play = 19;
 		}
+		
 		
 		image = ima[play].get();
 		image.resize(412, 241);
@@ -125,13 +127,11 @@ public class Logica {
 				y -= 5;
 			}
 
-			if (app.mouseX < 839 && app.mouseX > 800 && app.mouseY < 442 && app.mouseY > 402 && tam > -170) {
+			if (app.mouseX < 839 && app.mouseX > 800 && app.mouseY < 442 && app.mouseY > 402 && tam > - 170) {
 				tam -= 5;
 				y += 5;
 			}
-
-			image = ima[play].get();
-			image.resize(412, 241);
+			
 			image.resize(image.width + tam, image.height + tam);
 		}
 	}
