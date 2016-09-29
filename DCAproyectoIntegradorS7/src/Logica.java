@@ -8,9 +8,11 @@ public class Logica {
 	private PApplet app;
 
 	int play = 0, modisize = 0, tam = 0, rotar = 0, y = 0;
+	//int numIma = 4, posY = 80, var = 0;
 	boolean aumento = true, full = false;
 	private PImage fondo, image;
 	private PImage[] ima = new PImage[20];
+	private PImage[] imaPeq = new PImage[20];
 
 	// JuanDavid======================================================================================================================
 
@@ -40,11 +42,17 @@ public class Logica {
 		// Me carga las imagenes
 		for (int i = 0; i < archivos.length; i++) {
 			ima[i] = app.loadImage(archivos[i].toString());
+			imaPeq[i] = app.loadImage(archivos[i].toString());
 		}
-		//Carga el fondo
+		// Carga el fondo
 		fondo = app.loadImage("../data/interfaz/interfaz.png");
-		
-		//Escala las imagenes
+
+//		// recorre y escala las imagenes pequeñas
+//		for (int i = var; i < imaPeq.length; i++) {
+//			imaPeq[i].resize(120, 80);
+//		}
+
+		// Escala las imagenes
 		image = ima[play].get();
 		image.resize(412, 241);
 	}
@@ -52,11 +60,16 @@ public class Logica {
 	// JuanDavid======================================================================================================================
 
 	public void pintar() {
-		//Carga la imagen de fondo
+		// Carga la imagen de fondo
 		app.image(fondo, 0, 0);
 
-		//Carga la imagen del visualizador
+		// Carga la imagen del visualizador
 		ima[play].resize(412 + modisize, 241 + modisize);
+
+//		// carga la lista de imagenes pequeñas
+//		for (int i = var; i < numIma; i++) {
+//			app.image(imaPeq[i], 120, 120 * i + posY);
+//		}
 
 		app.pushMatrix();
 		app.imageMode(app.CENTER);
@@ -66,7 +79,7 @@ public class Logica {
 		app.imageMode(app.CORNER);
 		app.popMatrix();
 
-		//me posiciona la imagen para el fullscreen
+		// me posiciona la imagen para el fullscreen
 		if (full) {
 			app.image(image, 0, 0);
 		}
@@ -89,8 +102,8 @@ public class Logica {
 			tam = 0;
 			rotar = 0;
 		}
-		
-		//me permite seguir cambiando imagenes infinitamente
+
+		// me permite seguir cambiando imagenes infinitamente
 		if (play > 19) {
 			play = 0;
 
@@ -98,14 +111,38 @@ public class Logica {
 		if (play < 0) {
 			play = 19;
 		}
-		
-		
+
 		image = ima[play].get();
 		image.resize(412, 241);
 
 		if (full)
 			full = false;
-		
+
+//		// correr imagenes pequeñas
+//		if (app.mouseX > 207 && app.mouseX < 153 && app.mouseY > 581 && app.mouseY < 543) {
+//			posY -= 120;
+//			numIma += 1;
+//			var += 1;
+//		}
+//
+//		// indicaciones para recorrer las imagenes pequeñas
+//		if (numIma < 0) {
+//			numIma = 19;
+//		}
+//
+//		if (var < 0) {
+//			var = 19;
+//		}
+//
+//		if (numIma >= 20) {
+//			numIma = 4;
+//			posY += 1917;
+//		}
+//
+//		if (var >= 16) {
+//			var = 0;
+//		}
+
 		System.out.println("Pos X " + app.mouseX + " pos Y " + app.mouseY);
 		// System.out.println(tam);
 		// System.out.println(rotar);
@@ -128,11 +165,11 @@ public class Logica {
 				y -= 5;
 			}
 
-			if (app.mouseX < 839 && app.mouseX > 800 && app.mouseY < 442 && app.mouseY > 402 && tam > - 170) {
+			if (app.mouseX < 839 && app.mouseX > 800 && app.mouseY < 442 && app.mouseY > 402 && tam > -170) {
 				tam -= 5;
 				y += 5;
 			}
-			
+
 			image.resize(image.width + tam, image.height + tam);
 		}
 	}
@@ -159,7 +196,7 @@ public class Logica {
 
 			image = ima[play].get();
 			image.resize(412, 241);
-			//re-escala la imagen a pantalla completa
+			// re-escala la imagen a pantalla completa
 			image.resize(1004, 604);
 
 		}
