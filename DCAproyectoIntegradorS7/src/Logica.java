@@ -12,19 +12,18 @@ public class Logica {
 	private PImage fondo, image;
 	private PImage[] ima = new PImage[20];
 
-	// ======================================================================================================================
+	// JuanDavid======================================================================================================================
 
 	public Logica(PApplet app) {
 		this.app = app;
-		// file que conecta a la carpeta
+		// File que conecta a la carpeta
 		File carpeta = new File("../data/imagenes");
 
-		// arreglo con los tipos de archivos
+		// Arreglo con los tipos de archivos
 		String[] tipos = new String[] { "jpg", "png", "bmp" };
 
-		// identifica las extensiones de las imagenes
+		// Identifica las extensiones de las imagenes
 		FilenameFilter analiza = new FilenameFilter() {
-
 			public boolean accept(File carpeta, String nombre) {
 				for (final String ext : tipos) {
 					if (nombre.endsWith("." + ext)) {
@@ -42,21 +41,21 @@ public class Logica {
 		for (int i = 0; i < archivos.length; i++) {
 			ima[i] = app.loadImage(archivos[i].toString());
 		}
-
+		//Carga el fondo
 		fondo = app.loadImage("../data/interfaz/interfaz.png");
 		
-		//escala las imagenes
+		//Escala las imagenes
 		image = ima[play].get();
 		image.resize(412, 241);
 	}
 
-	// ======================================================================================================================
+	// JuanDavid======================================================================================================================
 
 	public void pintar() {
 		//Carga la imagen de fondo
 		app.image(fondo, 0, 0);
 
-		// carga la imagen del visualizador
+		//Carga la imagen del visualizador
 		ima[play].resize(412 + modisize, 241 + modisize);
 
 		app.pushMatrix();
@@ -67,12 +66,13 @@ public class Logica {
 		app.imageMode(app.CORNER);
 		app.popMatrix();
 
+		//me posiciona la imagen para el fullscreen
 		if (full) {
 			app.image(image, 0, 0);
 		}
 	}
 
-	// ======================================================================================================================
+	// JuanDavid======================================================================================================================
 
 	public void mouse() {
 
@@ -105,13 +105,14 @@ public class Logica {
 
 		if (full)
 			full = false;
+		
 		System.out.println("Pos X " + app.mouseX + " pos Y " + app.mouseY);
 		// System.out.println(tam);
 		// System.out.println(rotar);
 
 	}
 
-	// ======================================================================================================================
+	// Angeles======================================================================================================================
 
 	public void aumentar() {
 
@@ -136,7 +137,7 @@ public class Logica {
 		}
 	}
 
-	// ======================================================================================================================
+	// Angeles======================================================================================================================
 
 	public void rotar() {
 
@@ -150,7 +151,7 @@ public class Logica {
 
 	}
 
-	// ======================================================================================================================
+	// Angeles======================================================================================================================
 
 	public void fullScreen() {
 		if (app.mouseX < 692 && app.mouseX > 653 && app.mouseY < 444 && app.mouseY > 406) {
@@ -158,6 +159,7 @@ public class Logica {
 
 			image = ima[play].get();
 			image.resize(412, 241);
+			//re-escala la imagen a pantalla completa
 			image.resize(1004, 604);
 
 		}
